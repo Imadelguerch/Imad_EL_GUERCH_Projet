@@ -107,9 +107,11 @@ class Book() :
                 
     def OrderBook(self): 
           print("Book on %s" %self.name)
-          self.ListSell()
+          if(self.list_sell!=[]):
+              self.ListSell()
           print("------------------------")
-          self.ListBuy()
+          if(self.list_buy!=[]):
+              self.ListBuy()
           print("------------------------")
           print(" ")
     
