@@ -2,6 +2,7 @@
 
 from functools import total_ordering
 
+import pandas as pd
 
 class Book() :
     def __init__(self ,name):
@@ -10,6 +11,10 @@ class Book() :
         self.list_buy=[]
         self.list_sell=[]
         self.cpt=0
+        
+        
+   
+        
                        
     def insert_buy(self,q , p):
         self.cpt+=1
@@ -75,12 +80,35 @@ class Book() :
        
         
     def ListBuy(self): 
-          for e in self.list_buy:
-              print(e)
+        
+        d_quantity=[]
+        d_price=[]
+        d_id=[]
+        for i in range(len(self.list_buy)):
+            d_quantity.append(self.list_buy[i].quantity)
+            d_price.append(self.list_buy[i].price)
+            d_id.append(self.list_buy[i].id)
+        data = {'Quantity':d_quantity,'Price':d_price}
+        df = pd.DataFrame(data, index=d_id)
+        
+        print(df)
+        # for e in self.list_buy:
+        #       print(e)
              
     def ListSell(self): 
-          for e in self.list_sell[::-1]:
-              print(e)
+        
+        # for e in self.list_sell[::-1]:
+        #    print(e)
+        d_quantity=[]
+        d_price=[]
+        d_id=[]
+        for i in range(len(self.list_sell)):
+            d_quantity.append(self.list_sell[i].quantity)
+            d_price.append(self.list_sell[i].price)
+            d_id.append(self.list_sell[i].id) 
+        data = {'Quantity':d_quantity,'Price':d_price}
+        df = pd.DataFrame(data, index=d_id)
+        print(df)
                 
     def OrderBook(self): 
           print("Sell")
@@ -115,7 +143,7 @@ class Order:
         return "Order(%s, %s)" % (self.quantity, self.price)
     
     def quantity(self):
-        return self.quantity if self.buy else -self.quantity
+        return self.quantity 
     
     def price(self):
         return self.price 
