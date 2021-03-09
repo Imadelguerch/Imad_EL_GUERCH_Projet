@@ -12,9 +12,6 @@ class Book() :
         self.list_sell=[]
         self.cpt=0
         
-        
-   
-        
                        
     def insert_buy(self,q , p):
         self.cpt+=1
@@ -73,48 +70,45 @@ class Book() :
         
         else:
             self.list_sell.append(O)
-            self.list_sell=sorted(self.list_sell)
-            
+            self.list_sell=sorted(self.list_sell)   
         self.OrderBook()   
                 
        
         
     def ListBuy(self): 
-        
         d_quantity=[]
         d_price=[]
         d_id=[]
+        B=[]
         for i in range(len(self.list_buy)):
+            B.append("Buy")
             d_quantity.append(self.list_buy[i].quantity)
             d_price.append(self.list_buy[i].price)
             d_id.append(self.list_buy[i].id)
-        data = {'Quantity':d_quantity,'Price':d_price}
-        df = pd.DataFrame(data, index=d_id)
+            
+        data = {'Quantity':d_quantity,'Price':d_price, "Id":d_id }
+        df = pd.DataFrame(data, index=B)
         
         print(df)
-        # for e in self.list_buy:
-        #       print(e)
-             
-    def ListSell(self): 
         
-        # for e in self.list_sell[::-1]:
-        #    print(e)
+    def ListSell(self): 
         d_quantity=[]
         d_price=[]
         d_id=[]
+        S=[]
         for i in range(len(self.list_sell)):
+            S.append("Sell")
             d_quantity.append(self.list_sell[i].quantity)
             d_price.append(self.list_sell[i].price)
             d_id.append(self.list_sell[i].id) 
-        data = {'Quantity':d_quantity,'Price':d_price}
-        df = pd.DataFrame(data, index=d_id)
+        data = {'Quantity':d_quantity,'Price':d_price, "Id":d_id }
+        df = pd.DataFrame(data, index=S)
         print(df)
                 
     def OrderBook(self): 
-          print("Sell")
+          print("Book on %s" %self.name)
           self.ListSell()
           print("------------------------")
-          print("Buy")
           self.ListBuy()
           print("------------------------")
           print(" ")
